@@ -144,6 +144,7 @@ const TransactionsHistory = ({ navigation, route }) => {
           onPress={() => setShowCalender(!showCalnender)}
         />
       </View>
+      <View><Text>test</Text></View>
       {showCalnender && (
         <Calendar
           onDayPress={(day) => {
