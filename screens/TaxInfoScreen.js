@@ -44,8 +44,6 @@ const {
   containerStyle,
 } = BaseStyle;
 
-
-
 const TAB_BUTTONS = [
   [THIS_MONTH, THIS_YEAR, ALL_RECORD],
   [UPCOMING, PAID],
@@ -121,7 +119,7 @@ const TaxInfoBox = ({ taxDetails, navigation }) => (
 
 const styles = StyleSheet.create({
   container: {
-    gap: Platform.OS === "web" ? wp(3.5) : wp(7),
+    gap: Platform.OS === "web" ? wp(2.4) : wp(7),
   },
   iconBtnStyle: {
     backgroundColor: homeButtonBackGround,
@@ -148,5 +146,7 @@ const styles = StyleSheet.create({
   },
   listContentContainer: {
     gap: Platform.OS === "web" ? wp(3.5) : wp(6),
+    height: Platform.OS === "web" ? hp(60) : null,
+    paddingBottom: spacings.xxxLarge,
   },
 });

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { View, StyleSheet, FlatList, ScrollView } from "react-native";
+import { View, StyleSheet, FlatList, ScrollView, Platform } from "react-native";
 import { BaseStyle } from "../shared/styles";
-import { widthPercentageToDP as wp } from "../utils";
+import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "../utils";
 import { spacings, style } from "../shared/constants/fonts";
 import {
   whiteColor,
@@ -105,7 +105,7 @@ const InvestmentDashboard = ({ navigation }) => {
           showsHorizontalScrollIndicator={false}
         />
       </View>
-      <ScrollView>
+      <ScrollView contentContainerStyle={[styles.scrollViewContainer]}>
         <View style={styles.container}>
           <View
             style={[styles.chartContainer, width100Percent, alignItemsCenter]}
@@ -147,6 +147,9 @@ const styles = StyleSheet.create({
     backgroundColor: lightGrayColor,
     paddingHorizontal: spacings.Large1x,
     width: wp(100),
+  },
+  scrollViewContainer:{
+    height: Platform.OS === "web" ? hp(70) : null
   },
   chartContainer: {
     marginTop: wp(6),

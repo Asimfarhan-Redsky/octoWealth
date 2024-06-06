@@ -16,7 +16,11 @@ import {
   grayColor,
   whiteColor,
 } from "../constants/colors";
-import { ADD_INVESMENTS, SELECT_INVESTMENT } from "../constants/constants";
+import {
+  ADD_INVESMENTS,
+  INVESTMENT_DASHBOARD,
+  SELECT_INVESTMENT,
+} from "../constants/constants";
 import { BaseStyle } from "../shared/styles";
 import Header from "../components/Header";
 import Button from "../components/Button";
@@ -33,6 +37,10 @@ const {
 
 const InvestmentDetails = ({ navigation, route }) => {
   const { itemName } = route?.params;
+
+  const handleButtonPress = () => {
+    navigation.navigate(INVESTMENT_DASHBOARD);
+  };
 
   return (
     <View style={[styles.container, flex]}>
@@ -80,6 +88,7 @@ const InvestmentDetails = ({ navigation, route }) => {
         buttonText={ADD_INVESMENTS}
         buttonStyle={[styles.addButton, alignSelfCenter, alignJustifyCenter]}
         textStyle={[styles.buttonText]}
+        onPress={handleButtonPress}
       />
     </View>
   );
@@ -144,7 +153,7 @@ const styles = StyleSheet.create({
     paddingVertical: spacings.xxLarge,
     width: wp(70),
     borderRadius: 24,
-    marginTop: wp(4),
+    marginTop: wp(6),
   },
   buttonText: {
     color: whiteColor,

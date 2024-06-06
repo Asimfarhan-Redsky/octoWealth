@@ -178,7 +178,10 @@ const TransactionsHistory = ({ navigation, route }) => {
           />
         </View>
 
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={[styles.scrollViewContainer]}
+        >
           <View style={[styles.totalBalanceBox]}>
             <TotalBalance balanceText={TOTAL_BALANCE} totalBalance={"50.000"} />
           </View>
@@ -346,12 +349,15 @@ const styles = StyleSheet.create({
     marginTop: Platform.OS === "web" ? wp(2) : wp(5),
     marginHorizontal: spacings.xxLarge,
   },
+  scrollViewContainer: {
+    height: Platform.OS === "web" ? hp(70) : null
+  },
   transOfCategoriesBox: {
     backgroundColor: filterBtnColor,
     padding: spacings.large,
     marginTop: spacings.large,
     width: wp(100),
-    paddingBottom: spacings.xxxxLarge
+    paddingBottom: spacings.xxxxLarge,
   },
   headingText: {
     marginVertical: spacings.large,
