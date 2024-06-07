@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Octicons from "react-native-vector-icons/Octicons";
 import Entypo from "react-native-vector-icons/Entypo";
@@ -14,6 +14,9 @@ import {
   blackColor,
   forestGreen,
   grayColor,
+  lawnGreen,
+  lightSkyBlue,
+  pictonBlue,
   whiteColor,
 } from "../constants/colors";
 import {
@@ -24,6 +27,7 @@ import {
 import { BaseStyle } from "../shared/styles";
 import Header from "../components/Header";
 import Button from "../components/Button";
+import { InvestmentContext } from "../context/InvestmentProvider";
 
 const {
   flexDirectionRow,
@@ -35,10 +39,25 @@ const {
   flex,
 } = BaseStyle;
 
+const portfolioData = {
+  name: "Derayah Financial",
+  portfolioValue: 22600.0,
+  profitLoss: 500.0,
+  profitLossPercentage: 10,
+  investments: [
+    { title: "Equities", color: lawnGreen, amount: 50 },
+    { title: "Instruments", color: pictonBlue, amount: 35 },
+    { title: "Real Estate", color: lightSkyBlue, amount: 15 },
+  ],
+  type: "growth portfolio",
+};
+
 const InvestmentDetails = ({ navigation, route }) => {
+  const { setPortfolio } = useContext(InvestmentContext);
   const { itemName } = route?.params;
 
   const handleButtonPress = () => {
+    setPortfolio((prevPortfolio) => [...prevPortfolio, portfolioData]);
     navigation.navigate(INVESTMENT_DASHBOARD);
   };
 

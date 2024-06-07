@@ -47,7 +47,7 @@ const {
 const TAB_BUTTONS = [
   [THIS_MONTH, THIS_YEAR, ALL_RECORD],
   [UPCOMING, PAID],
-];
+]
 
 const TaxInfoScreen = ({ navigation }) => {
   return (

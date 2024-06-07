@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { View, StyleSheet, FlatList, ScrollView, Platform } from "react-native";
 import { BaseStyle } from "../shared/styles";
-import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "../utils";
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from "../utils";
 import { spacings, style } from "../shared/constants/fonts";
 import {
   whiteColor,
@@ -21,35 +24,9 @@ import MonthSelector from "../components/MonthSelector";
 import InvestmentBarChart from "../components/InvestmentBarChart";
 import Button from "../components/Button";
 import InvestmentPortfolioCard from "../components/InvestmentPortfolioCard";
+import { InvestmentContext } from "../context/InvestmentProvider";
 
 const { width100Percent, alignItemsCenter, textAlignCenter } = BaseStyle;
-
-const portfolioData = [
-  {
-    name: "Abyan Capital",
-    portfolioValue: 22600.0,
-    profitLoss: 500.0,
-    profitLossPercentage: 10,
-    investments: [
-      { title: "Equities", color: lawnGreen, amount: 50 },
-      { title: "Instruments", color: pictonBlue, amount: 30 },
-      { title: "Real Estate", color: lightSkyBlue, amount: 10 },
-    ],
-    type: "growth portfolio",
-  },
-  {
-    name: "Derayah Financial",
-    portfolioValue: 22600.0,
-    profitLoss: 500.0,
-    profitLossPercentage: 10,
-    investments: [
-      { title: "Equities", color: lawnGreen, amount: 50 },
-      { title: "Instruments", color: pictonBlue, amount: 35 },
-      { title: "Real Estate", color: lightSkyBlue, amount: 15 },
-    ],
-    type: "growth portfolio",
-  },
-];
 
 const allInvestmentsData = {
   name: "All your investments",
@@ -80,6 +57,7 @@ const months = [
 
 const InvestmentDashboard = ({ navigation }) => {
   const [activeMonth, setActiveMonth] = useState("Jan");
+  const { portfolio } = useContext(InvestmentContext);
 
   const handleAddInvestmentPress = () => {
     navigation.navigate(INVESTMENT_TYPE_SELECTION);
@@ -120,7 +98,7 @@ const InvestmentDashboard = ({ navigation }) => {
           </View>
           <InvestmentPortfolioCard item={allInvestmentsData} />
           <FlatList
-            data={portfolioData}
+            data={portfolio}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => <InvestmentPortfolioCard item={item} />}
             contentContainerStyle={styles.flatListContainer}
@@ -148,8 +126,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacings.Large1x,
     width: wp(100),
   },
-  scrollViewContainer:{
-    height: Platform.OS === "web" ? hp(70) : null
+  scrollViewContainer: {
+    height: Platform.OS === "web" ? hp(70) : null,
   },
   chartContainer: {
     marginTop: wp(6),
