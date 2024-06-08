@@ -6,6 +6,7 @@ import {
   StatusBar,
   FlatList,
   TouchableOpacity,
+  Platform
 } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { BaseStyle } from "../shared/styles";
@@ -31,6 +32,7 @@ const {
   alignJustifyCenter,
 } = BaseStyle;
 
+const platformWeb = Platform.OS === "web";
 const investmentTypes = [
   { type: "Stocks", description: "Stocks and ETFs" },
   { type: "Crypto", description: "Bitcoin, Ethereum, Dogecoin, etc." },
@@ -44,6 +46,7 @@ const investmentTypes = [
 
 const InvestmentCategoryItem = React.memo(({ item, isActive, onPress }) => (
   <TouchableOpacity
+    activeOpacity={0.9}
     onPress={onPress}
     style={[
       styles.cardContainer,
@@ -112,9 +115,9 @@ const styles = StyleSheet.create({
   container: {
     width: wp(100),
     backgroundColor: backgroundColor,
-    paddingTop: spacings.Large2x + StatusBar.currentHeight,
+    paddingTop: platformWeb ? wp(3) : spacings.Large2x + StatusBar.currentHeight,
     paddingHorizontal: spacings.Large2x,
-    gap: wp(3),
+    gap: platformWeb ? wp(2) : wp(3),
   },
   headingText: {
     fontSize: style.fontSizeLargeXX.fontSize,
@@ -122,7 +125,7 @@ const styles = StyleSheet.create({
     color: blackColor,
   },
   flatListContainer: {
-    gap: wp(4),
+    gap: platformWeb ? wp(2.7) : wp(4),
   },
   cardContainer: {
     paddingVertical: spacings.xxxxLarge,

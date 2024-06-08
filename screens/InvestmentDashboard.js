@@ -11,8 +11,6 @@ import {
   lightGrayColor,
   royalBlue,
   lawnGreen,
-  pictonBlue,
-  lightSkyBlue,
   lightCyan,
 } from "../constants/colors";
 import {
@@ -117,7 +115,7 @@ const styles = StyleSheet.create({
     backgroundColor: whiteColor,
   },
   monthListContainer: {
-    gap: wp(4.7),
+    gap: wp(4.5),
     paddingHorizontal: spacings.xxxLarge,
     paddingVertical: spacings.xxxLarge,
   },

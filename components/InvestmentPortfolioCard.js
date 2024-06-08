@@ -1,17 +1,17 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Platform } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { BaseStyle } from "../shared/styles";
 import { widthPercentageToDP as wp } from "../utils";
 import { spacings, style } from "../shared/constants/fonts";
 import {
-  CrimsonRed,
   blackColor,
   bottomBorderColor,
   grayColor,
   homeButtonBackGround,
   lightCyan,
   whiteColor,
+  deepRed,
 } from "../constants/colors";
 import {
   ALL_YOUR_INVESTMENTS,
@@ -70,7 +70,7 @@ const InvestmentAmountBox = ({
 const InvestmentPortfolioCard = ({ item }) => {
   const isAllYourInvestments = item.name === ALL_YOUR_INVESTMENTS;
   const bulletColor = isAllYourInvestments ? "#DEBDC5" : "#CEE2E8";
-  const amountColor = isAllYourInvestments ? CrimsonRed : lightCyan;
+  const amountColor = isAllYourInvestments ? deepRed : lightCyan;
 
   return (
     <View style={styles.container}>
@@ -130,7 +130,7 @@ export default React.memo(InvestmentPortfolioCard);
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: wp(4),
+    marginTop: Platform.OS === "web" ? wp(2) : wp(4),
   },
   header: {},
   title: {
@@ -146,9 +146,9 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: whiteColor,
     borderRadius: 9,
-    marginTop: wp(3.5),
+    marginTop: Platform.OS === "web" ? wp(1.8) : wp(3.5),
     paddingVertical: spacings.xxxLarge,
-    paddingHorizontal: wp(6),
+    paddingHorizontal: Platform.OS === "web" ? wp(3) : wp(6),
     gap: wp(1.5),
   },
   amountContainer: {},

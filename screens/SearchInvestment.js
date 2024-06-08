@@ -7,6 +7,7 @@ import {
   StatusBar,
   TextInput,
   FlatList,
+  Platform,
 } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import AntDesign from "react-native-vector-icons/AntDesign";
@@ -30,16 +31,17 @@ const {
   alignItemsCenter,
   justifyContentSpaceBetween,
   gap1_5,
+  flexhal
 } = BaseStyle;
-
+const platformWeb = Platform.OS === "web";
 const data = ["Apple", "Samsung", "Viovo", "Oppo"];
 
 const SearchInvestment = ({ navigation }) => {
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredData = data.filter((item) =>
-    item.toLowerCase().includes(searchQuery.toLowerCase()),
-  );
+  // const filteredData = data.filter((item) =>
+  //   item.toLowerCase().includes(searchQuery.toLowerCase()),
+  // );
 
   const handleInputChange = (text) => {
     setSearchQuery(text);
@@ -62,46 +64,44 @@ const SearchInvestment = ({ navigation }) => {
         <View style={[styles.searchBar, flexDirectionRow, alignItemsCenter]}>
           <Feather name="search" size={25} color={blackColor} />
           <TextInput
-            placeholder="Search"
+            placeholder="Apple"
             placeholderTextColor={blackColor}
             onChangeText={handleInputChange}
             value={searchQuery}
-            style={styles.textInput}
+            style={[styles.textInput, platformWeb && { outline: "none" }]}
           />
         </View>
-        {searchQuery.length > 0 && (
+        <TouchableOpacity
+          activeOpacity={0.8}
+          style={[styles.cancelButton, flexDirectionRow, alignItemsCenter]}
+          onPress={handleCancelPress}
+        >
+          <MaterialIcons name="cancel" size={25} color={redColor} />
+          <Text style={styles.cancelText}>{CANCEL}</Text>
+        </TouchableOpacity>
+      </View>
+      <FlatList
+        // data={filteredData}
+        data={["Apple"]}
+        renderItem={({ item }) => (
           <TouchableOpacity
-            style={[styles.cancelButton, flexDirectionRow, alignItemsCenter]}
-            onPress={handleCancelPress}
+            style={[
+              styles.listItem,
+              flexDirectionRow,
+              alignItemsCenter,
+              gap1_5,
+            ]}
+            onPress={() =>
+              navigation.navigate(INVESTMENT_DETAILS, { itemName: item })
+            }
           >
-            <MaterialIcons name="cancel" size={25} color={redColor} />
-            <Text style={styles.cancelText}>{CANCEL}</Text>
+            <AntDesign name="apple1" size={25} color={grayColor} />
+            <Text style={styles.listItemText}>{item}</Text>
           </TouchableOpacity>
         )}
-      </View>
-      {searchQuery.length > 0 && (
-        <FlatList
-          data={filteredData}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              style={[
-                styles.listItem,
-                flexDirectionRow,
-                alignItemsCenter,
-                gap1_5,
-              ]}
-              onPress={() =>
-                navigation.navigate(INVESTMENT_DETAILS, { itemName: item })
-              }
-            >
-              <AntDesign name="apple1" size={25} color={grayColor} />
-              <Text style={styles.listItemText}>{item}</Text>
-            </TouchableOpacity>
-          )}
-          keyExtractor={(item) => item}
-          contentContainerStyle={styles.listContentContainer}
-        />
-      )}
+        keyExtractor={(item) => item}
+        contentContainerStyle={styles.listContentContainer}
+      />
     </View>
   );
 };
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: backgroundColor,
-    paddingTop: StatusBar.currentHeight + spacings.Large2x,
+    paddingTop: platformWeb ? wp(3) : spacings.Large2x + StatusBar.currentHeight,
     paddingHorizontal: spacings.Large1x,
   },
   searchContainer: {
@@ -130,16 +130,17 @@ const styles = StyleSheet.create({
     flex: 1,
     height: "100%",
     fontSize: style.fontSizeMedium.fontSize,
+
   },
   cancelButton: {
     gap: wp(1),
-    flex: 1,
+    flex: platformWeb ? 0.3 : 1,
   },
   cancelText: {
     fontSize: style.fontSizeMedium.fontSize,
   },
   listContentContainer: {
-    paddingTop: spacings.Large1x,
+    paddingTop: platformWeb ? spacings.ExtraLarge : spacings.Large2x,
     gap: wp(3),
   },
   listItem: {

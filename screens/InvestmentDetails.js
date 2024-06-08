@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Platform } from "react-native";
 import Octicons from "react-native-vector-icons/Octicons";
 import Entypo from "react-native-vector-icons/Entypo";
 import {
@@ -39,6 +39,7 @@ const {
   flex,
 } = BaseStyle;
 
+const platformWeb = Platform.OS === "web";
 const portfolioData = {
   name: "Derayah Financial",
   portfolioValue: 22600.0,
@@ -120,7 +121,7 @@ const styles = StyleSheet.create({
     backgroundColor: backgroundColor,
     paddingHorizontal: spacings.Large1x,
     paddingVertical: spacings.Large2x,
-    gap: wp(3.5),
+    gap: platformWeb ? wp(1.7) : wp(3.5),
   },
   headerTextStyle: {
     fontSize: style.fontSizeMedium.fontSize,
@@ -152,7 +153,7 @@ const styles = StyleSheet.create({
     color: black70,
   },
   shareContainer: {
-    marginTop: wp(2.5),
+    marginTop: platformWeb ? wp(1.7) : wp(2.5),
   },
   sharePrice: {
     fontSize: style.fontSizeExtraLarge.fontSize,
@@ -172,7 +173,7 @@ const styles = StyleSheet.create({
     paddingVertical: spacings.xxLarge,
     width: wp(70),
     borderRadius: 24,
-    marginTop: wp(6),
+    marginTop: platformWeb ? wp(3) : wp(6),
   },
   buttonText: {
     color: whiteColor,

@@ -3,13 +3,11 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { BaseStyle } from "../shared/styles";
 import {
   widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
 } from "../utils";
 import { spacings, style } from "../shared/constants/fonts";
 import {
   CrimsonRed,
   blackColor,
-  lightGrayColor,
   whiteColor,
 } from "../constants/colors";
 
@@ -21,6 +19,7 @@ const MonthSelector = ({ month, year, isActive, onPress }) => {
       <Text style={styles.yearText}>{year}</Text>
       <TouchableOpacity
         onPress={onPress}
+        activeOpacity={0.9}
         style={[
           styles.monthButton,
           { backgroundColor: isActive ? CrimsonRed : "#F3F3F3" },
@@ -50,7 +49,8 @@ const styles = StyleSheet.create({
     padding: spacings.xxxLarge,
   },
   monthText: {
-    fontSize: style.fontSizeSmall1x.fontSize,
+    fontSize: style.fontSizeSmall2x.fontSize,
+    fontWeight: style.fontWeightThin.fontWeight
   },
   yearText: {
     fontSize: style.fontSizeSmall.fontSize,

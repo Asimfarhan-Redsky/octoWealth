@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   StatusBar,
+  Platform,
 } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { BaseStyle } from "../shared/styles";
@@ -21,7 +22,7 @@ const { flexDirectionRow, alignItemsCenter, alignSelfEnd, gap1 } = BaseStyle;
 const TotalInvestmentAmount = () => {
   return (
     <View style={[styles.container, flexDirectionRow, alignItemsCenter]}>
-      <View style={[alignSelfEnd, gap1]}>
+      <View style={[styles.totalInvestmentAmount, alignSelfEnd]}>
         <Text style={styles.totalInvestmentText}>{TOTAL_INVESTMENT}</Text>
         <Text style={styles.investmentAmountText}>
           $ 75,259.<Text style={styles.centsText}>00</Text>
@@ -60,6 +61,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacings.xLarge,
     paddingVertical: spacings.small,
     borderRadius: 5,
+  },
+  totalInvestmentAmount: {
+    gap: Platform.OS === "web" ? wp(0.5) : gap1.gap
   },
   totalInvestmentText: {
     color: whiteColor,

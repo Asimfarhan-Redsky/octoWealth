@@ -39,6 +39,7 @@ export const pictonBlue = "#6A9FCD";
 export const lightSkyBlue = "#89C6E0";
 export const lightCyan = "#619CA4";
 export const forestGreen = "#30AD1B";
+export const deepRed = "#893547"
 
 
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Platform } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     gap: wp(2.5),
   },
   progressBar: {
-    height: hp(0.6),
+    height: Platform.OS === "web" ? wp(1) : hp(0.6),
     backgroundColor: lightGrayColor,
     borderRadius: 10,
     overflow: "hidden",
