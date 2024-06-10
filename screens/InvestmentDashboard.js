@@ -81,7 +81,7 @@ const InvestmentDashboard = ({ navigation }) => {
           showsHorizontalScrollIndicator={false}
         />
       </View>
-      <ScrollView contentContainerStyle={[styles.scrollViewContainer]}>
+      <ScrollView contentContainerStyle={[styles.scrollViewContainer]} showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
           <View
             style={[styles.chartContainer, width100Percent, alignItemsCenter]}

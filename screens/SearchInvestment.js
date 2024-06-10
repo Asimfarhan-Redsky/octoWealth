@@ -8,6 +8,7 @@ import {
   TextInput,
   FlatList,
   Platform,
+  SafeAreaView,
 } from "react-native";
 import Feather from "react-native-vector-icons/Feather";
 import AntDesign from "react-native-vector-icons/AntDesign";
@@ -31,7 +32,7 @@ const {
   alignItemsCenter,
   justifyContentSpaceBetween,
   gap1_5,
-  flexhal
+  flex
 } = BaseStyle;
 const platformWeb = Platform.OS === "web";
 const data = ["Apple", "Samsung", "Viovo", "Oppo"];
@@ -52,6 +53,7 @@ const SearchInvestment = ({ navigation }) => {
   };
 
   return (
+    <SafeAreaView style={[flex]}>
     <View style={styles.container}>
       <View
         style={[
@@ -103,6 +105,7 @@ const SearchInvestment = ({ navigation }) => {
         contentContainerStyle={styles.listContentContainer}
       />
     </View>
+    </SafeAreaView> 
   );
 };
 

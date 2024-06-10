@@ -4,7 +4,6 @@ import { BaseStyle } from "../shared/styles";
 import { spacings } from "../shared/constants/fonts";
 import {
   widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
 } from "../utils";
 import {
   backgroundColor,
@@ -111,7 +110,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacings.xxxxLarge,
     paddingVertical: spacings.xxxxLarge,
     backgroundColor: backgroundColor,
-    gap: wp(6.5),
+    gap: Platform.OS === "web" ? wp(3.5) : wp(6.5),
   },
   scrollView: {
     gap: Platform.OS === "web" ? wp(2) : wp(4),

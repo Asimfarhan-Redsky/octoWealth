@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   container: {
     width: wp(100),
     backgroundColor: royalBlue,
-    height: hp(15),
+    height: Platform.OS === "web" ? hp(12) : hp(15),
     paddingBottom: spacings.Large1x,
     paddingTop: spacings.Large2x + StatusBar.currentHeight,
     paddingHorizontal: spacings.Large2x,

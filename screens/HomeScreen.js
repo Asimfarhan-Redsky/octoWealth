@@ -307,7 +307,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     width: wp(100),
     paddingHorizontal: spacings.Large1x,
-    gap: wp(5),
+    gap: Platform.OS === "web" ? wp(2.5) : wp(5),
     marginTop: spacings.ExtraLarge4x,
     ...StyleSheet.absoluteFill,
     backgroundColor: backgroundColor,

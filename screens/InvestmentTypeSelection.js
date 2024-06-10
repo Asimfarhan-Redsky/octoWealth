@@ -6,7 +6,8 @@ import {
   StatusBar,
   FlatList,
   TouchableOpacity,
-  Platform
+  Platform,
+  SafeAreaView
 } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { BaseStyle } from "../shared/styles";
@@ -30,6 +31,7 @@ const {
   alignItemsCenter,
   justifyContentSpaceBetween,
   alignJustifyCenter,
+  flex
 } = BaseStyle;
 
 const platformWeb = Platform.OS === "web";
@@ -91,21 +93,23 @@ const InvestmentTypeSelection = ({ navigation }) => {
     navigation.navigate(SEARCH_INVESTMENT);
   };
   return (
-    <View style={styles.container}>
-      <Text style={styles.headingText}>{SELECT_INVESTMENT_TYPE}</Text>
-      <FlatList
-        data={investmentTypes}
-        renderItem={({ item }) => (
-          <InvestmentCategoryItem
-            item={item}
-            isActive={item.type === activeType}
-            onPress={() => handleInvestmentTypePress(item?.type)}
-          />
-        )}
-        keyExtractor={(item, index) => index.toString()}
-        contentContainerStyle={styles.flatListContainer}
-      />
-    </View>
+    <SafeAreaView style={[flex]}>
+      <View style={[styles.container, flex]}>
+        <Text style={styles.headingText}>{SELECT_INVESTMENT_TYPE}</Text>
+        <FlatList
+          data={investmentTypes}
+          renderItem={({ item }) => (
+            <InvestmentCategoryItem
+              item={item}
+              isActive={item.type === activeType}
+              onPress={() => handleInvestmentTypePress(item?.type)}
+            />
+          )}
+          keyExtractor={(item, index) => index.toString()}
+          contentContainerStyle={styles.flatListContainer}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
